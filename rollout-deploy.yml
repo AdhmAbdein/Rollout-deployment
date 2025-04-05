@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rollout-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      rollout: deploy
+  template:
+    metadata:
+      name:  ngx
+      labels:
+        rollout: deploy
+    spec:
+      containers:
+        - name: nginx-rollout
+          image: nginx
+          ports:
+            - containerPort: 80
